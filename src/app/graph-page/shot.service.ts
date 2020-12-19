@@ -1,13 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {Shot} from '../models/Shot';
 
-export class Shot{
-  x: number;
-  y: number;
-  r: number;
-  success: boolean;
-}
 
 @Injectable()
 export class ShotService{

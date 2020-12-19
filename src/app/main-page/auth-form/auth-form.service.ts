@@ -1,15 +1,14 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
-export class User{
-  login = '';
-  pass = '';
-}
+import * as request from 'superagent';
+import {User} from '../../models/User';
 
 
 @Injectable()
 export class AuthFormService{
+
 
   private loggedInStatus = false;
 
@@ -24,12 +23,19 @@ export class AuthFormService{
     return this.loggedInStatus;
   }
 
-  tryToLogin(user: User): Observable<User> {
-    const login = user.login;
-    const pass = user.pass;
-    return this.http.post<User>('http://localhost:3000/postuser', {
-      login,
-      pass,
-    });
+  tryToLogin(user: User): Observable<User>{
+    const myHeaders = new HttpHeaders().set('X-Requested-With', 'XMLHttpRequest');
+    return this.http.post<User>('http://localhost:6511/api/authorization/signin', user);
   }
+
+  superAgentLogin(user: User): any{
+    request
+      .get('http://localhost:6501/api/authorization/signin')
+      .auth(user.login, user.password)
+      .set('X-Requested-With', 'XMLHttpRequest')
+      .end((err, res) => {
+        return res;
+      });
+  }
+
 }
