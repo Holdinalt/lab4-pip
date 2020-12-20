@@ -9,24 +9,29 @@ import {User} from '../../models/User';
 @Injectable()
 export class RegisterFormService{
 
-  private myHeaders = new HttpHeaders().set('X-Requested-With', 'XMLHttpRequest');
+
 
   constructor(private http: HttpClient) { }
 
-  tryToRegister(user: User): Observable<User>{
-    return this.http.post<User>('http://localhost:6520/api/authorization/signup', user);
+  tryToRegister(user: User): Observable<any>{
+    const myHeaders = new HttpHeaders()
+      .set('Access-Control-Allow-Origin', '/')
+      .set('Referrer-Policy', 'strict-origin-when-cross-origin')
+      .set('Content-Type', 'application/json');
+    // @ts-ignore
+    return this.http.post<any>('http://localhost:4200/api/authorization/signup', user, {headers: myHeaders, responseType: 'text'});
   }
 
   superAgentRegister(user: User): any{
     request
-      .post('http://localhost:6520/api/authorization/signup')
+      .post('http://localhost:4200/api/authorization/signup')
       .withCredentials()
       .send(JSON.stringify({username: user.login, password: user.password}))
       .type('json')
       .end((err, res) => {
-        console.log('rkek');
+        console.log(res.text);
+        return res.text;
       });
-    console.log('end');
   }
 
 }

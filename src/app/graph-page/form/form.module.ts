@@ -7,12 +7,11 @@ import {SliderModule} from 'primeng/slider';
 import {InputTextModule} from 'primeng/inputtext';
 import {ButtonModule} from 'primeng/button';
 import {RippleModule} from 'primeng/ripple';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   imports: [BrowserModule, FormsModule, SliderModule, InputTextModule, ButtonModule, RippleModule],
-  exports: [
-    FormComponent
-  ],
+  exports: [FormComponent],
   declarations: [FormComponent]
 })
 export class FormModule {}

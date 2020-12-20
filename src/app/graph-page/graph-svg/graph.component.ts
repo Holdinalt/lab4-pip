@@ -1,18 +1,7 @@
 import {Component, Output, EventEmitter} from '@angular/core';
 import * as $ from 'jquery';
+import {Shot} from '../../models/Shot';
 
-export class Hit{
-  xVal = 0;
-  yVal = 0;
-  rVal = 0;
-
-  constructor(x: number, y: number, r: number) {
-    this.xVal = x;
-    this.yVal = y;
-    this.rVal = r;
-
-  }
-}
 
 @Component({
   selector: 'graph-svg',
@@ -28,10 +17,10 @@ export class GraphComponent {
   }
 
   // tslint:disable-next-line:no-output-on-prefix
-  @Output() onClicked = new EventEmitter<Hit>();
+  @Output() onClicked = new EventEmitter<Shot>();
 
   makeHit(x: number, y: number, r: number): void{
-    this.onClicked.emit(new Hit(x, y, r));
+    this.onClicked.emit(new Shot(x, y, r));
   }
 
   svgClick(event): void{
@@ -39,6 +28,7 @@ export class GraphComponent {
     const x = event.clientX - target.left;
     const y = event.clientY - target.top;
     this.setNewCircle(x / 2 , y / 2);
+    this.clickButton();
   }
 
   setNewCircle(px: number, py: number): void{
@@ -82,8 +72,8 @@ export class GraphComponent {
     const target = event.currentTarget.getBoundingClientRect();
     let x: number = event.clientX - target.left;
     let y: number = event.clientY - target.top;
-    console.log(x);
-    console.log(y);
+    // console.log(x);
+    // console.log(y);
     this.drawCircle(x / 2, y / 2);
     if (x < 0) { x = 0; }
     if (y < 0) { y = 0; }
@@ -134,5 +124,7 @@ export class GraphComponent {
     $('#xSlider').attr('ng-reflect-model', x);
   }
 
-
+  clickButton(): void{
+    $('.submitButton').click();
+  }
 }

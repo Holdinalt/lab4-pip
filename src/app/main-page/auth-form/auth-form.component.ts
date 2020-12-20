@@ -16,18 +16,19 @@ export class AuthFormComponent{
 
   loginned = false;
 
+  regResult: string;
+
   user: User = new User();
 
   constructor(private authService: AuthFormService, private registerService: RegisterFormService) { }
 
   tryToLog(user: User): void{
-    // this.authService.tryToLogin(user).subscribe((data) => console.log('data', data));
-    // this.loginned = JSON.parse(sessionStorage.getItem('loggedIn'));
-    // console.log(this.authService.superAgentLogin(user));
+   // this.authService.tryToLogin(user).subscribe((data) => console.log(data));
+    this.authService.superAgentLogin(user);
   }
 
   tryToRegister(user: User): void{
-    this.registerService.tryToRegister(user).subscribe((data) => console.log(data));
-    //this.registerService.superAgentRegister(user);
+    //this.registerService.tryToRegister(user).subscribe((data) => console.log(data));
+    this.regResult = this.registerService.superAgentRegister(user);
   }
 }

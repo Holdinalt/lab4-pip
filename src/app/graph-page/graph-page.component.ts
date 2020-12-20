@@ -1,28 +1,22 @@
 import { Component } from '@angular/core';
+import {Shot} from '../models/Shot';
 
-export class Hit{
-  xVal = 0;
-  yVal = 0;
-  rVal = 0;
 
-  constructor(x: number, y: number, r: number) {
-    this.xVal = x;
-    this.yVal = y;
-    this.rVal = r;
-
-  }
-}
 
 @Component({
   selector: 'app-graph-page',
   template: `
-    <graph-svg (onClicked)="hit = $event"></graph-svg>
-    <app-form [hit]="hit"></app-form>
+    <req-table></req-table>
+    <log-out></log-out>
+    <graph-svg (onClicked)="shot = $event"></graph-svg>
+    <app-form [shot]="shot" ></app-form>
   `,
   //styleUrls: ['graph.component.css']
 })
 export class GraphPageComponent {
 
-  hit: Hit = new Hit(0, 0 , 1);
+  shot = new Shot();
+
+
 
 }
