@@ -6,10 +6,10 @@ import {Shot} from '../models/Shot';
 @Component({
   selector: 'app-graph-page',
   template: `
-    <req-table></req-table>
     <log-out></log-out>
     <graph-svg (onClicked)="shot = $event"></graph-svg>
     <app-form [shot]="shot" ></app-form>
+    <req-table></req-table>
   `,
   //styleUrls: ['graph.component.css']
 })

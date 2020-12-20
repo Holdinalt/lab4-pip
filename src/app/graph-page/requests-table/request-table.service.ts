@@ -53,13 +53,13 @@ export class RequestTableService{
   }
 
   createCircleFromValue(x: number, y: number, nr: number , result: boolean): void{
-    /*if (nr < 0){
+    if (nr < 0){
       x = -x;
       y = -y;
       nr = -nr;
-    }*/
-    const xpos = x * 100 / this.getR() + 150;
-    const ypos = (y * 100 / this.getR() * -1) + 150;
+    }
+    const xpos = x * 100 / Math.abs(this.getR()) + 150;
+    const ypos = (y * 100 / Math.abs(this.getR()) * -1) + 150;
     let col = 'red';
     if (result){
       col = 'green';

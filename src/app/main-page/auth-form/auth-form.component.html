@@ -18,8 +18,7 @@
 
   <button  type="button" pButton label="Submit" [disabled]="loginInput.invalid && passInput.invalid" (click)="tryToLog(user)"></button><br><br>
   <button  type="button" pButton label="Register" [disabled]="loginInput.invalid && passInput.invalid" (click)="tryToRegister(user)"></button>
-  <div>{{regResult}}</div>
-</div>
+  <br><span id="regAns"></span>
 
 <div class="block" *ngIf="loginned" style="height: 100px">
   Добро пожаловать {{user.login}} !

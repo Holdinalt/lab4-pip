@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 
 import * as request from 'superagent';
 import {User} from '../../models/User';
+import {element} from 'protractor';
 
 
 @Injectable()
@@ -29,8 +30,11 @@ export class RegisterFormService{
       .send(JSON.stringify({username: user.login, password: user.password}))
       .type('json')
       .end((err, res) => {
-        console.log(res.text);
-        return res.text;
+        if (res.ok){
+          document.getElementById('regAns').innerText = 'Регистрация успешна';
+        } else{
+          document.getElementById('regAns').innerText = res.text;
+        }
       });
   }
 
